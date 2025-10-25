@@ -29,9 +29,15 @@ commentsRouter.get("/", async (req, res) => {
 
 commentsRouter.post("/", auth, async (req, res, next) => {
   const user = (req as RequestWithUser).user;
-  const recipeId = new mongoose.Types.ObjectId(req.params.id);
+  const { recipeId, text } = req.body;
 
-  const text: string = req.body.text;
+  if (!recipeId || !text) {
+    return res.status(400).send({ error: "Recipe ID and text are required" });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(recipeId)) {
+    return res.status(400).send({ error: "Invalid recipe ID" });
+  }
 
   const commentData: IComment = {
     author: user._id,
@@ -46,7 +52,7 @@ commentsRouter.post("/", auth, async (req, res, next) => {
     res.send(comment);
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
-      return res.status(400).send(error);
+      return res.status(400).send({ error: error.message });
     }
     next(error);
   }

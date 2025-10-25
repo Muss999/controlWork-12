@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 app.use("/users", usersRouter);
 app.use("/recipes", recipesRouter);
-app.use("comments", commentsRouter);
+app.use("/comments", commentsRouter);
 
 const run = async () => {
   await mongoose.connect(config.db);

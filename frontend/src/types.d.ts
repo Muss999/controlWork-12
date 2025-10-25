@@ -21,6 +21,10 @@ export interface IUser {
 
 export interface IComment {
   _id: string;
+  author: {
+    _id: string;
+    displayName: string;
+  };
   recipeId: string;
   text: string;
 }
