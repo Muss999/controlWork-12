@@ -13,7 +13,7 @@ interface RecipesState {
   getRecipesFetching: boolean;
   getOneRecipeFetching: boolean;
   addRecipesFetching: boolean;
-  deleteRecipesFetching: boolean;
+  deleteRecipeFetching: boolean | string;
 }
 
 const initialState: RecipesState = {
@@ -22,7 +22,7 @@ const initialState: RecipesState = {
   getRecipesFetching: false,
   getOneRecipeFetching: false,
   addRecipesFetching: false,
-  deleteRecipesFetching: false,
+  deleteRecipeFetching: false,
 };
 const recipesSlice = createSlice({
   name: "recipes",
@@ -63,14 +63,14 @@ const recipesSlice = createSlice({
       state.addRecipesFetching = false;
     });
 
-    builder.addCase(deleteRecipe.pending, (state) => {
-      state.deleteRecipesFetching = true;
+    builder.addCase(deleteRecipe.pending, (state, action) => {
+      state.deleteRecipeFetching = action.meta.arg;
     });
     builder.addCase(deleteRecipe.fulfilled, (state) => {
-      state.deleteRecipesFetching = false;
+      state.deleteRecipeFetching = false;
     });
     builder.addCase(deleteRecipe.rejected, (state) => {
-      state.deleteRecipesFetching = false;
+      state.deleteRecipeFetching = false;
     });
   },
   selectors: {
@@ -79,7 +79,7 @@ const recipesSlice = createSlice({
     selectGetRecipesFetching: (state) => state.getRecipesFetching,
     selectGetOneRecipeFetching: (state) => state.getOneRecipeFetching,
     selectAddRecipeFetching: (state) => state.addRecipesFetching,
-    selectDeleteRecipeFetching: (state) => state.deleteRecipesFetching,
+    selectDeleteRecipeFetching: (state) => state.deleteRecipeFetching,
   },
 });
 

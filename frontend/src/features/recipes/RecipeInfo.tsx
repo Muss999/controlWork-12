@@ -21,6 +21,8 @@ const RecipeInfo = () => {
   const oneRecipeLoading = useAppSelector(selectGetOneRecipeFetching);
   const deleteRecipeLoading = useAppSelector(selectDeleteRecipeFetching);
 
+  const isDeleting = deleteRecipeLoading === recipeId;
+
   useEffect(() => {
     if (recipeId) {
       dispatch(getOneRecipe(recipeId));
@@ -86,12 +88,12 @@ const RecipeInfo = () => {
               {user && user._id === oneRecipe.author._id && (
                 <button
                   type="button"
-                  className="btn btn-danger align-self-start w-100"
+                  className="btn btn-danger align-self-start w-100 d-flex align-items-center justify-content-center gap-2"
                   onClick={deleteOneRecipe}
-                  disabled={deleteRecipeLoading}
+                  disabled={isDeleting}
                 >
-                  {deleteRecipeLoading && <SpinnerButton />}
-                  Delete
+                  {isDeleting && <SpinnerButton />}
+                  {isDeleting ? "Deleting..." : "Delete"}
                 </button>
               )}
 
