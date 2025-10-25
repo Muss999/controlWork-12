@@ -26,7 +26,7 @@ const CommentSchema = new Schema<IComment>({
         const recipe = await Recipe.findById(value);
         return Boolean(recipe);
       },
-      message: "User doesn't exist",
+      message: "Recipe doesn't exist",
     },
   },
   text: {
