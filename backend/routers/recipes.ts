@@ -67,7 +67,7 @@ recipesRouter.post(
 recipesRouter.delete("/:id", auth, async (req, res) => {
   try {
     const user = (req as RequestWithUser).user;
-    const { recipeId } = req.body;
+    const recipeId = req.params.id;
 
     if (!recipeId) {
       return res.status(400).send({ error: "Recipe ID is required" });

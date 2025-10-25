@@ -10,6 +10,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist/es/constants";
+import { recipesReducer } from "../features/recipes/recipesSlice";
 
 const userPersistConfig = {
   key: "music:users",
@@ -19,6 +20,7 @@ const userPersistConfig = {
 
 const rootReducer = combineReducers({
   users: persistReducer(userPersistConfig, usersReducer),
+  recipes: recipesReducer,
 });
 
 export const store = configureStore({

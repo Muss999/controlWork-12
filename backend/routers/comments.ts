@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import { imagesUpload } from "../multer";
 import auth, { RequestWithUser } from "../middleware/auth";
 import Comment from "../models/Comment";
 import { IComment, IRecipe } from "../types";
@@ -28,35 +27,30 @@ commentsRouter.get("/", async (req, res) => {
   }
 });
 
-commentsRouter.post(
-  "/",
-  auth,
-  imagesUpload.single("image"),
-  async (req, res, next) => {
-    const user = (req as RequestWithUser).user;
-    const recipeId = new mongoose.Types.ObjectId(req.params.id);
+commentsRouter.post("/", auth, async (req, res, next) => {
+  const user = (req as RequestWithUser).user;
+  const recipeId = new mongoose.Types.ObjectId(req.params.id);
 
-    const text: string = req.body.text;
+  const text: string = req.body.text;
 
-    const commentData: IComment = {
-      author: user._id,
-      recipeId,
-      text,
-    };
+  const commentData: IComment = {
+    author: user._id,
+    recipeId,
+    text,
+  };
 
-    try {
-      const comment = new Comment(commentData);
-      await comment.save();
+  try {
+    const comment = new Comment(commentData);
+    await comment.save();
 
-      res.send(comment);
-    } catch (error) {
-      if (error instanceof mongoose.Error.ValidationError) {
-        return res.status(400).send(error);
-      }
-      next(error);
+    res.send(comment);
+  } catch (error) {
+    if (error instanceof mongoose.Error.ValidationError) {
+      return res.status(400).send(error);
     }
+    next(error);
   }
-);
+});
 
 commentsRouter.delete("/", auth, async (req, res) => {
   try {

@@ -19,6 +19,28 @@ export interface IUser {
   avatar: string | null;
 }
 
+export interface IComment {
+  _id: string;
+  recipeId: string;
+  text: string;
+}
+export interface ICommentForm {
+  recipeId: string;
+  text: string;
+}
+
+export interface IRecipe {
+  _id: string;
+  name: string;
+  recipe: string;
+  image: string | null;
+}
+export interface IRecipeForm {
+  name: string;
+  recipe: string;
+  image: string | null;
+}
+
 export interface ValidationError {
   errors: {
     [key: string]: {
