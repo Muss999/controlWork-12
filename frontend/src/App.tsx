@@ -6,8 +6,14 @@ import Register from "./features/users/Register";
 import Login from "./features/users/Login";
 import RecipeInfo from "./features/recipes/RecipeInfo";
 import UserRecipes from "./features/recipes/UserRecipes";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import RecipeAdd from "./features/recipes/recipeForm/RecipeAdd";
+import { useAppSelector } from "./app/hooks";
+import { selectUser } from "./features/users/usersSlice";
 
 const App = () => {
+  const user = useAppSelector(selectUser);
+
   return (
     <Layout>
       <Routes>
@@ -20,6 +26,15 @@ const App = () => {
 
         <Route path="/recipes/:id" element={<RecipeInfo />} />
         <Route path="/user/:id/recipes" element={<UserRecipes />} />
+
+        <Route
+          path="/recipes/add"
+          element={
+            <ProtectedRoute isAllowed={!!user}>
+              <RecipeAdd />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>

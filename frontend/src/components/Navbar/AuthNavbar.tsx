@@ -29,6 +29,11 @@ const AuthNavbar = ({ user }: Props) => {
             <div className="dropdown-header">User: {user.displayName}</div>
           </li>
           <li>
+            <Link className="dropdown-item" to={"/recipes/add"}>
+              Add recipe
+            </Link>
+          </li>
+          <li>
             <Link className="dropdown-item" to={`/user/${user._id}/recipes`}>
               My recipes
             </Link>

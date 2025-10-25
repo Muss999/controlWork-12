@@ -1,13 +1,15 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectGetRecipesFetching, selectRecipes } from "./recipesSlice";
 import { getRecipes } from "./recipesThunk";
 import Spinner from "../../components/Spinner/Spinner";
 import RecipeItem from "./RecipeItem";
+import { selectUser } from "../users/usersSlice";
 
 const UserRecipes = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
   const { id } = useParams();
   const recipes = useAppSelector(selectRecipes);
   const recipesLoading = useAppSelector(selectGetRecipesFetching);
@@ -33,6 +35,11 @@ const UserRecipes = () => {
   return (
     <>
       <h4 className="mb-3">{userRecipes[0].author.displayName}'s Recipes</h4>
+      {user && user._id === id && (
+        <Link className="btn btn-primary mb-3 ml-auto" to={"/recipes/add"}>
+          Add recipe
+        </Link>
+      )}
       <div className="d-flex flex-wrap gap-3">
         {userRecipes.map((recipe) => (
           <RecipeItem recipe={recipe} key={recipe._id} />
