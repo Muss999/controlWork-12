@@ -4,6 +4,7 @@ import Recipe from "../models/Recipe";
 import { imagesUpload } from "../multer";
 import auth, { RequestWithUser } from "../middleware/auth";
 import { IRecipe } from "../types";
+import Comment from "../models/Comment";
 
 export const recipesRouter = express.Router();
 
@@ -82,9 +83,15 @@ recipesRouter.delete("/:id", auth, async (req, res) => {
     if (!recipe) {
       return res.status(404).send({ error: "Recipe not found" });
     }
+
     if (recipe.author.toString() === user._id.toString()) {
+      await Comment.deleteMany({ recipeId: recipe._id });
+
       await recipe.deleteOne();
-      return res.send({ message: "Recipe was deleted successfully" });
+
+      return res.send({
+        message: "Recipe and its comments were deleted successfully",
+      });
     } else {
       return res.status(401).send({ error: "You can't delete this recipe" });
     }

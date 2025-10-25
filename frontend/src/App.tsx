@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./features/home/Home";
 import Register from "./features/users/Register";
 import Login from "./features/users/Login";
+import RecipeInfo from "./features/recipes/RecipeInfo";
 
 const App = () => {
   return (
@@ -15,6 +16,8 @@ const App = () => {
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
+        <Route path="/recipes/:id" element={<RecipeInfo />} />
 
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>

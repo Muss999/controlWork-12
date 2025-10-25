@@ -1,5 +1,11 @@
+import RecipesList from "../recipes/RecipesList";
+
 const Home = () => {
-  return <div></div>;
+  return (
+    <div>
+      <RecipesList />
+    </div>
+  );
 };
 
 export default Home;

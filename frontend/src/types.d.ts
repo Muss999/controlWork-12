@@ -31,6 +31,12 @@ export interface ICommentForm {
 
 export interface IRecipe {
   _id: string;
+  author: {
+    _id: string;
+    username: string;
+    token: string;
+    displayName: string;
+  };
   name: string;
   recipe: string;
   image: string | null;
