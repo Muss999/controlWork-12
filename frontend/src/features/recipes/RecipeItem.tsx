@@ -11,30 +11,30 @@ const RecipeItem = ({ recipe }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      className={"card p-2 recipeCard border border-2"}
-      onClick={() => {
-        navigate(`/recipes/${_id}`);
-      }}
-    >
-      {image === null ? null : (
+    <div className="card p-2 recipeCard border-0 w-100">
+      {image && (
         <img
           src={API_URL + "/" + image}
-          className="card-img-top m-auto"
-          style={{
-            minWidth: "240px",
-            maxWidth: "240px",
-            maxHeight: "150px",
-            minHeight: "150px",
-            borderRadius: "5px",
-          }}
           alt={image}
+          className="card-img-top m-auto recipe-image"
         />
       )}
 
-      <div className="card-body d-flex flex-column">
-        <h5 className="card-title m-0">{name}</h5>
-        <p className="m-0">By {author.displayName}</p>
+      <div className="card-body">
+        <div className="recipe-info d-flex flex-column">
+          <h5
+            className="recipe-title"
+            onClick={() => navigate(`/recipes/${_id}`)}
+          >
+            {name}
+          </h5>
+          <span
+            className="recipe-author"
+            onClick={() => navigate(`/user/${author._id}/recipes`)}
+          >
+            By {author.displayName}
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Home from "./features/home/Home";
 import Register from "./features/users/Register";
 import Login from "./features/users/Login";
 import RecipeInfo from "./features/recipes/RecipeInfo";
+import UserRecipes from "./features/recipes/UserRecipes";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
 
         <Route path="/recipes/:id" element={<RecipeInfo />} />
+        <Route path="/user/:id/recipes" element={<UserRecipes />} />
 
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectUser } from "../users/usersSlice";
 import {
@@ -72,7 +72,10 @@ const RecipeInfo = () => {
             <div className="d-flex flex-column w-50">
               <h4>{oneRecipe.name}</h4>
               <p className="mb-1">
-                <b>Author:</b> {oneRecipe.author.displayName}
+                <b>Author: </b>
+                <Link to={`/user/${oneRecipe.author._id}/recipes`}>
+                  {oneRecipe.author.displayName}
+                </Link>
               </p>
               <p className="mb-1">
                 <b>Recipe:</b> {oneRecipe.recipe}

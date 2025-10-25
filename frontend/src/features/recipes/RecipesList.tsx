@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Spinner from "../../components/Spinner/Spinner";
 import { selectUser } from "../users/usersSlice";
-import { useLocation } from "react-router-dom";
 import { selectGetRecipesFetching, selectRecipes } from "./recipesSlice";
 import { getRecipes } from "./recipesThunk";
 import RecipeItem from "./RecipeItem";
@@ -12,7 +11,6 @@ const RecipesList = () => {
   const user = useAppSelector(selectUser);
   const recipes = useAppSelector(selectRecipes);
   const recipesLoading = useAppSelector(selectGetRecipesFetching);
-  const location = useLocation();
 
   useEffect(() => {
     dispatch(getRecipes());
@@ -27,9 +25,7 @@ const RecipesList = () => {
   if (recipesLoading === false && recipes.length === 0) {
     return (
       <div className="d-flex gap-5">
-        <div>
-          <div className="alert alert-warning">Recipes are not found</div>
-        </div>
+        <div className="alert alert-warning">Recipes are not found</div>
       </div>
     );
   }
