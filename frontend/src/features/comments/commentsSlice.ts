@@ -7,6 +7,7 @@ interface CommentsState {
   getCommentsFetching: boolean;
   addCommentsFetching: boolean;
   deleteCommentFetching: boolean | string;
+  addCommentError: string | null;
 }
 
 const initialState: CommentsState = {
@@ -14,6 +15,7 @@ const initialState: CommentsState = {
   getCommentsFetching: false,
   addCommentsFetching: false,
   deleteCommentFetching: false,
+  addCommentError: null,
 };
 const commentsSlice = createSlice({
   name: "comments",
@@ -33,12 +35,16 @@ const commentsSlice = createSlice({
 
     builder.addCase(addComment.pending, (state) => {
       state.addCommentsFetching = true;
+      state.addCommentError = null;
     });
     builder.addCase(addComment.fulfilled, (state) => {
       state.addCommentsFetching = false;
+      state.addCommentError = null;
     });
-    builder.addCase(addComment.rejected, (state) => {
+    builder.addCase(addComment.rejected, (state, action) => {
       state.addCommentsFetching = false;
+      state.addCommentError =
+        (action.payload as string) || "Failed to add comment";
     });
 
     builder.addCase(deleteComment.pending, (state, action) => {
@@ -56,6 +62,7 @@ const commentsSlice = createSlice({
     selectGetCommentsFetching: (state) => state.getCommentsFetching,
     selectAddCommentFetching: (state) => state.addCommentsFetching,
     selectDeleteCommentFetching: (state) => state.deleteCommentFetching,
+    selectAddCommentError: (state) => state.addCommentError,
   },
 });
 
@@ -65,4 +72,5 @@ export const {
   selectGetCommentsFetching,
   selectAddCommentFetching,
   selectDeleteCommentFetching,
+  selectAddCommentError,
 } = commentsSlice.selectors;

@@ -12,6 +12,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import SpinnerButton from "../../components/Spinner/SpinnerButton";
 import { API_URL } from "../../constants";
 import CommentsList from "../comments/CommentsList";
+import CommentAdd from "../comments/commentsForm/CommentAdd";
 
 const RecipeInfo = () => {
   const { id: recipeId } = useParams();
@@ -108,6 +109,7 @@ const RecipeInfo = () => {
         </div>
       </div>
       <div>
+        {user && <CommentAdd />}
         <CommentsList recipeAuthorId={oneRecipe.author._id} />
       </div>
     </>
