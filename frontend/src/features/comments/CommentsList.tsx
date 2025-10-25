@@ -20,7 +20,7 @@ const CommentsList = ({ recipeAuthorId }: Props) => {
     if (id) {
       dispatch(getComments(id));
     }
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   if (commentsLoading) {
     return <Spinner />;

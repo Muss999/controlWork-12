@@ -8,7 +8,7 @@ import Comment from "../models/Comment";
 
 export const recipesRouter = express.Router();
 
-recipesRouter.get("/", async (req, res) => {
+recipesRouter.get("/", async (_, res) => {
   try {
     const recipes = await Recipe.find().populate("author").exec();
     res.send(recipes);

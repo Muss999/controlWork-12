@@ -32,7 +32,7 @@ const Login = () => {
       await dispatch(login(state)).unwrap();
       navigate("/");
     } catch (e) {
-      console.error("Something went wrong");
+      console.error("Something went wrong", e);
       return;
     }
   };
