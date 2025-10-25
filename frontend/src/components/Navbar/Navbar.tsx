@@ -12,7 +12,7 @@ const Navbar = () => {
     <nav className="navbar bg-secondary mb-3" data-bs-theme="dark">
       <div className="container d-f justify-content-between">
         <Link to={"/"} className="navbar-brand">
-          Control Work 12
+          Recipe Book
         </Link>
         <div className="d-flex gap-3">
           {user ? <AuthNavbar user={user} /> : <NoAuthNavbar />}

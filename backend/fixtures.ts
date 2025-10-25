@@ -13,24 +13,22 @@ const run = async () => {
     console.log("Collections were not present, skipping drop...");
   }
 
-  const [admin, userMax] = await User.create(
+  const [userTom, userMax] = await User.create(
     {
       username: "1",
-      displayName: "Administrator",
+      displayName: "Thomas",
       password: "1",
-      email: "admin@gmail.com",
-      avatar: "/fixtures/adminAvatar.png",
+      email: "thomas@gmail.com",
+      avatar: "/fixtures/thomasAvatar.png",
       token: randomUUID(),
-      role: "admin",
     },
     {
       username: "2",
-      password: "2",
       displayName: "Max",
+      password: "2",
       email: "max@gmail.com",
       avatar: "/fixtures/maxAvatar.jpg",
       token: randomUUID(),
-      role: "user",
     }
   );
 

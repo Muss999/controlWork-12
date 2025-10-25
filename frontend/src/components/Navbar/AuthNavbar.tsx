@@ -29,9 +29,6 @@ const AuthNavbar = ({ user }: Props) => {
             <div className="dropdown-header">User: {user.displayName}</div>
           </li>
           <li>
-            <div className="dropdown-header">Role: {user.role}</div>
-          </li>
-          <li>
             <Link className="dropdown-item" to={"/"} onClick={handleLogout}>
               Logout
             </Link>
